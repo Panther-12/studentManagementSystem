@@ -69,12 +69,12 @@ public class Layout{
     }
 }
 
-// // The actionListener interface is contained in the java.awt.event
-// class ClickListener implements ActionListener {
-//     // Must implement the method below to eliminate the error
-//     public void actionPerformed(ActionEvent e){
-//         if(e.getSource() == "send"){
-//             System.out.println(input.getText());
-//         }
-//     }
-// }
+/* The actionListener interface is contained in the java.awt.event
+ class ClickListener implements ActionListener {
+     // Must implement the method below to eliminate the error
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == "send"){
+            System.out.println(input.getText());
+        }
+    }
+*/ }
