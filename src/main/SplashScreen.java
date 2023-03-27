@@ -13,6 +13,10 @@
 */
 package main;
 import javax.swing.JPanel;
+import java.util.*;
+import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.io.*;
 
 /**
  *
@@ -55,7 +59,7 @@ public class SplashScreen extends javax.swing.JFrame {
         lecturersOption = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        loginOption = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         adminOption = new javax.swing.JPanel();
@@ -64,8 +68,14 @@ public class SplashScreen extends javax.swing.JFrame {
         aboutOption = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        userId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         background.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -232,39 +242,44 @@ public class SplashScreen extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        jPanel5.setBackground(java.awt.SystemColor.controlHighlight);
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        loginOption.setBackground(java.awt.SystemColor.controlHighlight);
+        loginOption.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel5MouseEntered(evt);
+                loginOptionMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel5MouseExited(evt);
+                loginOptionMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel5MousePressed(evt);
+                loginOptionMousePressed(evt);
             }
         });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(223, 49, 80));
         jLabel11.setText("Login");
+        jLabel11.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jLabel11ComponentShown(evt);
+            }
+        });
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/settings.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/images/login2.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout loginOptionLayout = new javax.swing.GroupLayout(loginOption);
+        loginOption.setLayout(loginOptionLayout);
+        loginOptionLayout.setHorizontalGroup(
+            loginOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginOptionLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(loginOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        loginOptionLayout.setVerticalGroup(
+            loginOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginOptionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
@@ -279,6 +294,9 @@ public class SplashScreen extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 adminOptionMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                adminOptionMousePressed(evt);
             }
         });
 
@@ -318,6 +336,9 @@ public class SplashScreen extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 aboutOptionMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                aboutOptionMousePressed(evt);
+            }
         });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -347,31 +368,42 @@ public class SplashScreen extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
+        userId.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        userId.setForeground(new java.awt.Color(223, 49, 80));
+        userId.setText("User >>");
+
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+            .addComponent(titleBar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(homeOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(studentOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(31, 31, 31)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lecturersOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(aboutOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(homeOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(adminOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(studentOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(loginOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lecturersOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(aboutOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(userId, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addComponent(titleBar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userId, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(studentOption, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(homeOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -379,9 +411,9 @@ public class SplashScreen extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(adminOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loginOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(aboutOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -445,15 +477,15 @@ public class SplashScreen extends javax.swing.JFrame {
         resetColor(adminOption);
     }//GEN-LAST:event_adminOptionMouseExited
 
-    private void jPanel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseEntered
+    private void loginOptionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginOptionMouseEntered
         // TODO add your handling code here:
-        setColor(jPanel5);
-    }//GEN-LAST:event_jPanel5MouseEntered
+        setColor(loginOption);
+    }//GEN-LAST:event_loginOptionMouseEntered
 
-    private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
+    private void loginOptionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginOptionMouseExited
         // TODO add your handling code here:
-        resetColor(jPanel5);
-    }//GEN-LAST:event_jPanel5MouseExited
+        resetColor(loginOption);
+    }//GEN-LAST:event_loginOptionMouseExited
 
     private void aboutOptionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutOptionMouseEntered
         // TODO add your handling code here:
@@ -467,18 +499,82 @@ public class SplashScreen extends javax.swing.JFrame {
 
     private void studentOptionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentOptionMousePressed
         // TODO add your handling code here:
+        this.setVisible(false);
         new StudentData().show();
     }//GEN-LAST:event_studentOptionMousePressed
 
     private void lecturersOptionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lecturersOptionMousePressed
         // TODO add your handling code here:
+        this.setVisible(false);
         new LecturerData().show();
     }//GEN-LAST:event_lecturersOptionMousePressed
 
-    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
+    private void loginOptionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginOptionMousePressed
         // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            PrintWriter pw = new PrintWriter("loginsessions.txt");
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         new Login().show();
-    }//GEN-LAST:event_jPanel5MousePressed
+    }//GEN-LAST:event_loginOptionMousePressed
+
+    private void adminOptionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminOptionMousePressed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Admin().show();
+    }//GEN-LAST:event_adminOptionMousePressed
+
+    private void aboutOptionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutOptionMousePressed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new About().show();
+    }//GEN-LAST:event_aboutOptionMousePressed
+
+    private void jLabel11ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel11ComponentShown
+        // TODO add your handling code here:
+        LoginSession newUser  = new LoginSession();
+        if(newUser.getLoginState()){
+            this.jLabel11.setText("Login");
+        }
+        else{
+            this.jLabel11.setText("Logout");
+        }
+    }//GEN-LAST:event_jLabel11ComponentShown
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        String email = "";
+        String user = "";
+        
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader("loginsessions.txt"));
+            String line = fileReader.readLine();
+            while (line != null) {
+                email = line.split(",")[0];
+                user = line.split(",")[2];
+                line = fileReader.readLine();
+            }
+            fileReader.close();
+            this.jLabel11.setText("Logout");
+            this.userId.setText(""+user+""+">"+""+email);
+            
+            if(user.equalsIgnoreCase("student")){
+                this.lecturersOption.setVisible(false);
+                this.adminOption.setVisible(false);
+ 
+            }
+            if(user.equalsIgnoreCase("lecturer")){
+                this.adminOption.setVisible(false);
+                this.studentOption.setVisible(false);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_formComponentShown
     public void setColor(JPanel panel){
         panel.setBackground(new java.awt.Color(197,197,197));
     }
@@ -540,14 +636,15 @@ public class SplashScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lecturersOption;
+    private javax.swing.JPanel loginOption;
     private javax.swing.JSeparator searchBottomBorder;
     private javax.swing.JTextArea searchInput;
     private javax.swing.JPanel studentOption;
     private javax.swing.JLabel systemTitle;
     private javax.swing.JLabel systemType;
     private javax.swing.JPanel titleBar;
+    private javax.swing.JLabel userId;
     // End of variables declaration//GEN-END:variables
 }

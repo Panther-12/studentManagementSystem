@@ -4,11 +4,19 @@
  */
 package main;
 
+import java.io.*;
+import java.sql.ResultSet;
+import javax.swing.*;
+import main.LoginSession;
+import java.util.*;
+import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+
 /**
  *
  * @author Administrator
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame{
 
     /**
      * Creates new form Login
@@ -30,19 +38,13 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
         loginButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        emailInput = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         backgroundLogin.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -85,69 +87,47 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(null);
-        jScrollPane1.setViewportView(jTextArea1);
+        emailLabel.setText("Email");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setBorder(null);
-        jTextArea2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane2.setViewportView(jTextArea2);
+        passwordLabel.setText("Password");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jTextArea3.setBorder(null);
-        jScrollPane3.setViewportView(jTextArea3);
+        jPasswordField1.setText("jPasswordField1");
 
         javax.swing.GroupLayout backgroundLoginLayout = new javax.swing.GroupLayout(backgroundLogin);
         backgroundLogin.setLayout(backgroundLoginLayout);
         backgroundLoginLayout.setHorizontalGroup(
             backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(backgroundLoginLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(loginButton)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLoginLayout.createSequentialGroup()
+                .addContainerGap(159, Short.MAX_VALUE)
+                .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(backgroundLoginLayout.createSequentialGroup()
                         .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator4)))
-                    .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jSeparator1)
-                        .addComponent(jScrollPane1)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)))
-                .addGap(135, 135, 135))
+                            .addComponent(emailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(passwordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                            .addComponent(emailInput))
+                        .addGap(204, 204, 204))))
         );
         backgroundLoginLayout.setVerticalGroup(
             backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLoginLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(backgroundLoginLayout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLoginLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(loginButton)
-                .addContainerGap(211, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(backgroundLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailLabel))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordLabel))
+                .addGap(31, 31, 31)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,8 +135,8 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(backgroundLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(backgroundLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,15 +152,190 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         // If the credentials are okay close the login frame and show the splash screen
         // Define a private loggedIn checker and set it to false
-        boolean checkLoggedInStatus = false;
-        if(checkLoggedInStatus){
-            new Login().dispose();
-            new SplashScreen().show();
+        LoginSession newUser = new LoginSession();
+        String userType;
+        String programId;
+        boolean checkPasswordStatus;
+        String email;
+
+            
+        if(isStudent()){
+            userType = "student";
+            checkPasswordStatus = validatePassword("student");
+            if(checkPasswordStatus){
+                email = getEmailFromDb("student");
+                newUser.setLoginCredentials(checkPasswordStatus, email);
+                programId = getStudentProgramId();
+                writeNewSession(email,true,userType,programId);
+ 
+                JOptionPane.showMessageDialog(this, "Successfully logged in. Student user ID "+newUser.getLoginUserID());
+            }
         }
-        new Login().removeAll();
-        System.out.println("The user does not exist. If you are a student or lecturer contact the admin to add you to the system");
+        else if(isLecturer()){
+            userType = "lecturer";
+            checkPasswordStatus = validatePassword("lecturer");
+            if(checkPasswordStatus){
+                email = getEmailFromDb("lecturer");
+                newUser.setLoginCredentials(checkPasswordStatus, email);
+                programId = getLecturerProgramId();
+                writeNewSession(email,true,userType,programId);
+ 
+                JOptionPane.showMessageDialog(this, "Successfully logged in. lecturer user ID "+newUser.getLoginUserID());
+            }
+        }
+        else if(isAdmin()){
+            userType = "admin";
+            checkPasswordStatus = validatePassword("users");
+            if(checkPasswordStatus){
+                email = getEmailFromDb("users");
+                newUser.setLoginCredentials(checkPasswordStatus, email);
+                programId = "none";
+                writeNewSession(email,true,userType,programId);
+ 
+                JOptionPane.showMessageDialog(this, "Successfully logged in. Admin user ID "+newUser.getLoginUserID());               
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "User not found contact admin for futher assistance");
+        }
+            
+        this.setVisible(false);
+        new SplashScreen().show();
     }//GEN-LAST:event_loginButtonMousePressed
 
+    public boolean validatePassword(String table){
+        try{
+            Conn newConnection = new Conn();
+            boolean isPasswordValid = false;
+
+            String passwordQuery = "SELECT * FROM "+table+" WHERE password='"+this.jPasswordField1.getText()+"'";
+            
+            ResultSet rs2 = newConnection.s.executeQuery(passwordQuery);
+            rs2.next();
+            
+            if(rs2.getString("password").equalsIgnoreCase(this.jPasswordField1.getText())){
+                isPasswordValid = true;
+                System.out.println(rs2.getString("password")+" exists");
+                return isPasswordValid;
+            }
+            rs2.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+    public String getEmailFromDb(String table){
+        try{
+            Conn newConnection = new Conn();
+            
+            String emailQuery = "SELECT * FROM "+table+" WHERE email='"+this.emailInput.getText().toLowerCase()+"'";
+            
+            // System.out.format("%s","%s",this.emailInput.getText(),this.jPasswordField1.getText());
+            ResultSet rs1 = newConnection.s.executeQuery(emailQuery);
+            rs1.next();
+            return rs1.getString("email");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return "";
+    }
+    public int writeNewSession(String email, boolean loginstate, String userType, String programId){
+        try{
+            FileWriter writer = new FileWriter("loginsessions.txt", StandardCharsets.UTF_8,true);
+            writer.write(email+","+loginstate+","+userType+","+programId+"\n");
+            writer.close();
+            return 1;
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return 0;
+    } 
+    public boolean isStudent(){
+        try{
+            Conn newConnection = new Conn();
+            
+            String emailQuery = "SELECT * FROM student WHERE email='"+this.emailInput.getText().toLowerCase()+"'";
+            
+            // System.out.format("%s","%s",this.emailInput.getText(),this.jPasswordField1.getText());
+            ResultSet rs1 = newConnection.s.executeQuery(emailQuery);
+            if(rs1.next()){
+                return true;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+    public boolean isLecturer(){
+        try{
+            Conn newConnection = new Conn();
+            
+            String emailQuery = "SELECT * FROM lecturer WHERE email='"+this.emailInput.getText().toLowerCase()+"'";
+            
+            // System.out.format("%s","%s",this.emailInput.getText(),this.jPasswordField1.getText());
+            ResultSet rs1 = newConnection.s.executeQuery(emailQuery);
+            if(rs1.next()){
+                return true;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+    public boolean isAdmin(){
+        try{
+            Conn newConnection = new Conn();
+            
+            String emailQuery = "SELECT * FROM users WHERE email='"+this.emailInput.getText().toLowerCase()+"'";
+            
+            // System.out.format("%s","%s",this.emailInput.getText(),this.jPasswordField1.getText());
+            ResultSet rs1 = newConnection.s.executeQuery(emailQuery);
+            if(rs1.next()){
+                return true;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+    public String getStudentProgramId(){
+        try{
+            Conn newConnection = new Conn();
+            
+            String emailQuery = "SELECT * FROM student WHERE email='"+this.emailInput.getText().toLowerCase()+"'";
+            
+            // System.out.format("%s","%s",this.emailInput.getText(),this.jPasswordField1.getText());
+            ResultSet rs1 = newConnection.s.executeQuery(emailQuery);
+            rs1.next();
+            return rs1.getString("programID");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return "";
+    }
+    public String getLecturerProgramId(){
+        try{
+            Conn newConnection = new Conn();
+            
+            String emailQuery = "SELECT * FROM lecturer WHERE email='"+this.emailInput.getText().toLowerCase()+"'";
+            
+            // System.out.format("%s","%s",this.emailInput.getText(),this.jPasswordField1.getText());
+            ResultSet rs1 = newConnection.s.executeQuery(emailQuery);
+            rs1.next();
+            return rs1.getString("programID");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return "";
+    }
     /**
      * @param args the command line arguments
      */
@@ -218,19 +373,13 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel backgroundLogin;
+    private javax.swing.JTextField emailInput;
+    private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton loginButton;
+    private javax.swing.JLabel passwordLabel;
     // End of variables declaration//GEN-END:variables
 }
