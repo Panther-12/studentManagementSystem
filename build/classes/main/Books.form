@@ -159,7 +159,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" pref="130" max="-2" attributes="0"/>
+                              <Component id="borrowButton" min="-2" pref="130" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
@@ -185,7 +185,7 @@
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jButton1" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="borrowButton" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace pref="172" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -197,7 +197,7 @@
                     <Property name="text" type="java.lang.String" value="ISNN title"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="borrowButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="50" green="31" red="df" type="rgb"/>
@@ -210,6 +210,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Borrow book"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="borrowButtonMousePressed"/>
+                  </Events>
                 </Component>
                 <Component class="java.awt.Choice" name="choice1">
                 </Component>

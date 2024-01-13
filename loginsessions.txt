@@ -1,0 +1,4 @@
+mkuu8@gmail.com,true,student,EB3
+nimrodnyongesa@gmail.com,true,student,EB1
+mkuu8@gmail.com,true,student,EB3
+nimrodnyongesa@gmail.com,true,student,EB1

@@ -15,6 +15,16 @@ import java.text.ParseException;
 /**
  *
  * @author Administrator
+ * EB1/56064/21 - VICTOR PRESTON
+ * EB1/52821/21 -ISAAC MUTURI
+ * EB1/56066/21 - STANELY AGOTI
+ * EB1/56386/21 - NIMROD WALWE
+ * EB1/56065/21 - DENNIS KIPKOECH
+ * EB1/56042/21 - AUSTIN NJOROGE
+ * EB1/56429/21 - NIMROD KIBET
+ * EB1/40762/19 - GIBSON KIMONO
+ * EB1/56067/21 - ANTHONY KIPLIMO
+ * EB1/56132/21 - CHARITY MANONO
  */
 public class Login extends javax.swing.JFrame{
 
@@ -169,6 +179,12 @@ public class Login extends javax.swing.JFrame{
                 writeNewSession(email,true,userType,programId);
  
                 JOptionPane.showMessageDialog(this, "Successfully logged in. Student user ID "+newUser.getLoginUserID());
+                this.setVisible(false);
+                new SplashScreen().show();
+            }
+            else{
+              JOptionPane.showMessageDialog(this, "Wrong password try again or Contact admin");
+              
             }
         }
         else if(isLecturer()){
@@ -181,6 +197,11 @@ public class Login extends javax.swing.JFrame{
                 writeNewSession(email,true,userType,programId);
  
                 JOptionPane.showMessageDialog(this, "Successfully logged in. lecturer user ID "+newUser.getLoginUserID());
+                this.setVisible(false);
+                new SplashScreen().show();
+            }
+            else{
+              JOptionPane.showMessageDialog(this, "Wrong password try again or Contact admin");             
             }
         }
         else if(isAdmin()){
@@ -193,14 +214,19 @@ public class Login extends javax.swing.JFrame{
                 writeNewSession(email,true,userType,programId);
  
                 JOptionPane.showMessageDialog(this, "Successfully logged in. Admin user ID "+newUser.getLoginUserID());               
+                
+                            
+                this.setVisible(false);
+                new SplashScreen().show();
+            }
+            else{
+              JOptionPane.showMessageDialog(this, "Wrong password try again or Contact admin");             
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "User not found contact admin for futher assistance");
+            JOptionPane.showMessageDialog(this, "Invalid email...User not found contact admin for futher assistance");
         }
-            
-        this.setVisible(false);
-        new SplashScreen().show();
+
     }//GEN-LAST:event_loginButtonMousePressed
 
     public boolean validatePassword(String table){
@@ -335,6 +361,9 @@ public class Login extends javax.swing.JFrame{
             System.out.println(e);
         }
         return "";
+    }
+    public void displayErroMessage(){
+    
     }
     /**
      * @param args the command line arguments

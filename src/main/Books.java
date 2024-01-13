@@ -3,7 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
+import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,7 +40,7 @@ public class Books extends javax.swing.JFrame {
         bookForms = new javax.swing.JTabbedPane();
         borrow = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        borrowButton = new javax.swing.JButton();
         choice1 = new java.awt.Choice();
         returnBook = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -100,10 +105,15 @@ public class Books extends javax.swing.JFrame {
 
         jLabel4.setText("ISNN title");
 
-        jButton1.setBackground(new java.awt.Color(223, 49, 80));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Borrow book");
+        borrowButton.setBackground(new java.awt.Color(223, 49, 80));
+        borrowButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        borrowButton.setForeground(new java.awt.Color(255, 255, 255));
+        borrowButton.setText("Borrow book");
+        borrowButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                borrowButtonMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout borrowLayout = new javax.swing.GroupLayout(borrow);
         borrow.setLayout(borrowLayout);
@@ -112,7 +122,7 @@ public class Books extends javax.swing.JFrame {
             .addGroup(borrowLayout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addGroup(borrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(borrowLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(50, 50, 50)
@@ -131,7 +141,7 @@ public class Books extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)))
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(borrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
@@ -274,6 +284,78 @@ public class Books extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formComponentShown
 
+    private void borrowButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowButtonMousePressed
+        // TODO add your handling code here:
+        Random random = new Random();
+        
+        String[] values = getProgramIdAndType();
+        String regNo = getRegistrationNo(values[1],values[2]);
+        String bookMethodId = ""+random.nextInt(1000)+"";
+        String bookCode = this.choice1.getSelectedItem();
+        int[] borrowStates = borrowStatesUpdate();
+        
+        int borrowState = borrowStates[0];
+        int returnState = borrowStates[1];
+        int reserveState = borrowStates[1];
+        
+        try{
+            Conn newConnection = new Conn();
+            String borrowBook = "INSERT INTO bookmethods VALUES("+"'"+regNo+"'"+","+"'"+bookMethodId+"'"+","+"'"+bookCode+"'"+","+borrowState+","+returnState+","+reserveState+")" ;
+            newConnection.s.executeUpdate(borrowBook);
+            JOptionPane.showMessageDialog(this, bookCode+"borrowed successfully");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }//GEN-LAST:event_borrowButtonMousePressed
+    public String[] getProgramIdAndType(){
+        String type ="";
+        String programId="";
+        String email = "";
+        String[] details = {};
+        
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader("loginsessions.txt"));
+            String line = fileReader.readLine();
+            while (line != null) {
+                programId = line.split(",")[3];
+                type = line.split(",")[2];
+                email = line.split(",")[0];
+                line = fileReader.readLine();
+            }
+            fileReader.close();
+            details[0] = programId;
+            details[1] = type;
+            details[2] = email;
+            
+            return details;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return details;  
+    }
+    public String getRegistrationNo(String table, String email){
+        try{
+            Conn newConnection = new Conn();
+            String query1 = "SELECT * FROM "+table+" WHERE email='"+email+"'";
+            ResultSet rs4 = newConnection.s.executeQuery(query1);
+            
+            if(rs4.next()){
+                return rs4.getString("regNo");
+            }
+            rs4.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return "";
+    }
+    public int[] borrowStatesUpdate(){
+        int[] borrowStates = {1,0,0};
+        return borrowStates;
+    }
     /**
      * @param args the command line arguments
      */
@@ -312,10 +394,10 @@ public class Books extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane bookForms;
     private javax.swing.JPanel borrow;
+    private javax.swing.JButton borrowButton;
     private java.awt.Choice choice1;
     private java.awt.Choice choice2;
     private java.awt.Choice choice3;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

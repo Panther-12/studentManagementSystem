@@ -258,7 +258,7 @@ public class StudentData extends javax.swing.JFrame {
         
         try{
             Conn newConnection = new Conn();
-            String query1 = "SELECT * FROM student WHERE programID='EB1'";
+            String query1 = "SELECT * FROM student WHERE programID='"+programID+"'";
             ResultSet rs4 = newConnection.s.executeQuery(query1);
             
             while(rs4.next()){
@@ -288,7 +288,7 @@ public class StudentData extends javax.swing.JFrame {
         
         try{
             Conn newConnection = new Conn();
-            String query1 = "SELECT * FROM courses WHERE programID='EB1'";
+            String query1 = "SELECT * FROM courses WHERE programID='"+programID+"'";
             ResultSet rs5 = newConnection.s.executeQuery(query1);
             
             while(rs5.next()){
