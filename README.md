@@ -10,7 +10,6 @@ This project is a Student Management System developed using Java Swing. It is de
 - User-friendly GUI.
 
 ## Installation
-```markdown
 # Prerequisites: Java should be installed on your system.
 
 # Step 1: Clone the repository
