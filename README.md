@@ -2,7 +2,7 @@
 
 ## Overview
 This project is a Student Management System developed using Java Swing. It is designed to manage and store student information efficiently.  
-![Dashboard](https://drive.google.com/file/d/1hhT_OPuj33--arQL0F31_W4sIuw0vGdX)
+![Dashboard](https://drive.google.com/file/d/1hhT_OPuj33--arQL0F31_W4sIuw0vGdX/view)
 
 
 ## Features
