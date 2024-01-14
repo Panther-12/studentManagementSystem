@@ -31,6 +31,19 @@ Select a student and click 'Delete'.
 
 # Search: 
 Use the search bar to find students.
+# Contributions to this project are welcome. Here are the steps:
+
+# Step 1: Fork the repository
+# Step 2: Create a new branch
+git checkout -b new-feature
+
+# Step 3: Make your changes and commit them
+git commit -m 'Add some feature'
+
+# Step 4: Push to the branch
+git push origin new-feature
+
+# Step 5: Submit a pull request
 
 # Step 3: Compile the Java files
 javac *.java
